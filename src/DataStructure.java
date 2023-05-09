@@ -18,6 +18,8 @@ public class DataStructure<E extends Obstacle> {
         end = end.prev;
         return toReturn;
     }
+    //this code was adapted from an online resource
+
     public void drawAll( Graphics g){
         Node<E> elem = this.end;
         elem.element.draw(g);

@@ -55,8 +55,7 @@ public class Player implements Drawable {
         Node<NPC> node = w.purpleCows.end;
         NPC elem = node.element;
         double elemLoc = elem.position.x;
-        if(elemLoc - position.x < 200 && elem.engaged == false){
-            System.out.println("fuck you");
+        if(elemLoc - position.x < 1000 && elem.engaged == false){
             elem.setVelocity(new Pair(-100, 0));
             elem.engaged = true;
         }
@@ -65,7 +64,6 @@ public class Player implements Drawable {
             elem = node.element;
             elemLoc = elem.position.x;
             if(elemLoc - position.x < 200 && elem.engaged == false){
-                System.out.println("asshole");
                 elem.setVelocity(new Pair(-100, 0));
                 elem.engaged = true;
             }

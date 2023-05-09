@@ -31,8 +31,8 @@ public class Main extends JPanel implements KeyListener{
 
     public void keyPressed(KeyEvent e) {
         if(e.getKeyCode() == KeyEvent.VK_W && world.player.ableToJump){
-            world.player.setAcceleration(new Pair(world.player.acceleration.x, 700));
-            world.player.setVelocity(new Pair(world.player.velocity.x, -400));
+            world.player.setAcceleration(new Pair(world.player.acceleration.x, 670));
+            world.player.setVelocity(new Pair(world.player.velocity.x, -470));
         }
         if(e.getKeyCode() == KeyEvent.VK_A && !world.player.atStart && !world.player.rightCollision){
             Pair a = new Pair(-world.playerVelocity, world.player.velocity.y);
@@ -78,8 +78,6 @@ public class Main extends JPanel implements KeyListener{
         world = new World(WIDTH, HEIGHT);
         midline = new Rectangle2D.Double(WIDTH/2 + world.player.playerWidth, 0, WIDTH/2 -
                 world.player.playerWidth, HEIGHT);
-        System.out.println(world.player.hitBox.getBounds2D());
-        System.out.println(world.player.hitBox.contains(midline));
         addKeyListener(this);
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         Thread mainThread = new Thread(new Runner());

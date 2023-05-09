@@ -11,10 +11,10 @@ public class Pipe extends Obstacle implements Drawable{
     int width;
 
 
-    public Pipe(int x, int y){
+    public Pipe(int x, int y, int width, int height){
         super(x, y);
-        height = 100;
-        width = 70;
+        this.height = height;
+        this.width = width;
         wallHeight = height - wallWidth;
         position = new Pair(x, y);
         leftWall = new Rectangle2D.Double(position.x, position.y + wallWidth, wallWidth, wallHeight);

@@ -7,6 +7,7 @@ public class Brick extends Obstacle implements Drawable{
 
     public Brick(int x, int y){
         super(x, y);
+
     }
     @Override
     public void draw(Graphics g){

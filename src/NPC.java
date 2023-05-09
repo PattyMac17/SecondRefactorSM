@@ -24,7 +24,6 @@ public class NPC extends Obstacle implements Drawable{
         super.update(w, time);
         jumpStop(w);
         scrollAdjust(w);
-        System.out.println(bounceCount%2);
     }
 
     @Override
@@ -38,7 +37,6 @@ public class NPC extends Obstacle implements Drawable{
     }
     public void scrollAdjust(World w){
         if(engaged){
-            System.out.println(!leftCollision(w.everything)&& !rightCheck(w.everything));
             if(w.isScrolling){
                 if(bounceCount%2 ==0){
                     velocity = new Pair(-300, velocity.y);
