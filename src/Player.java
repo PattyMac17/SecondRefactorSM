@@ -1,11 +1,12 @@
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
-public class Player implements Drawable{
+public class Player implements Drawable {
     Rectangle2D hitBox;
     Pair position;
     Pair velocity;
     Pair acceleration;
+    double cowVelo;
 
     int playerHeight;
     int playerWidth;
@@ -16,10 +17,11 @@ public class Player implements Drawable{
     boolean ableToJump = false;
     boolean leftCollision = false;
     boolean rightCollision = false;
-    public Player(){
+    public Player(World w){
         //set player height and width
         this.playerHeight = 50;
         this.playerWidth = 30;
+        this.cowVelo = w.cowVelocity;
 
         //set initial position
         this.position = new Pair(50, Main.HEIGHT - 99 - this.playerHeight);
@@ -43,7 +45,31 @@ public class Player implements Drawable{
         jumpStop(w);
         jumpStart(w);
 
+        engageCow(w);
+
         w.everything.collisionCheck(w);
+        w.everything.NPCCheck(w.purpleCows);
+
+    }
+    public void engageCow(World w){
+        Node<NPC> node = w.purpleCows.end;
+        NPC elem = node.element;
+        double elemLoc = elem.position.x;
+        if(elemLoc - position.x < 200 && elem.engaged == false){
+            System.out.println("fuck you");
+            elem.setVelocity(new Pair(-100, 0));
+            elem.engaged = true;
+        }
+        while (node.prev != null){
+            node = node.prev;
+            elem = node.element;
+            elemLoc = elem.position.x;
+            if(elemLoc - position.x < 200 && elem.engaged == false){
+                System.out.println("asshole");
+                elem.setVelocity(new Pair(-100, 0));
+                elem.engaged = true;
+            }
+        }
 
     }
     public void midCheck(){
@@ -82,21 +108,6 @@ public class Player implements Drawable{
     public void jumpStop(World w){
         if(hitBox.intersects(w.ground.groundLevel) && velocity.y > 0){
             velocity = new Pair(velocity.x,0);
-        }
-    }
-    public <E extends Obstacle> void DSJumpStopCheck(DataStructure<E> DS, World w){
-        Node<E> endNode = DS.end;
-        if(hitBox.intersects(endNode.element.topWall) && velocity.y > 0){
-            velocity = new Pair(velocity.x,0);
-
-        }
-        while (endNode.prev != null){
-            endNode = endNode.prev;
-            E elem = endNode.element;
-            if(hitBox.intersects(elem.topWall) && velocity.y > 0){
-                velocity = new Pair(velocity.x,0);
-
-            }
         }
     }
     public <E extends Obstacle> void jumpStart( World w){

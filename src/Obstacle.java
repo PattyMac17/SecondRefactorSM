@@ -11,6 +11,7 @@ public abstract class Obstacle {
     Rectangle2D bottomWall;
     int sideLength;
     int wallLength;
+    //Pair storedSpeed;
     public Obstacle(int x, int y){
         position = new Pair(x, y);
         this.velocity = new Pair(0, 0);

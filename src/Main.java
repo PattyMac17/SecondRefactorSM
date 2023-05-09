@@ -47,17 +47,10 @@ public class Main extends JPanel implements KeyListener{
                 a = new Pair(-world.playerVelocity, 0);
                 world.ground.setVelocity(a);
                 world.everything.setVelocity(a);
+                world.purpleCows.adjustXVelocity();
+                world.isScrolling = true;
+                //world.purpleCows.fullStop();
             }
-        }
-    }
-    public <E extends Obstacle> void moveDS(DataStructure<E> DS, Pair a){
-        Node<E> node = DS.end;
-        E elem = node.element;
-        elem.setVelocity(a);
-        while (node.prev != null){
-            node = node.prev;
-            elem = node.element;
-            elem.setVelocity(a);
         }
     }
 
@@ -67,6 +60,7 @@ public class Main extends JPanel implements KeyListener{
             world.player.setVelocity(a);
             world.ground.setVelocity(new Pair(0, 0));
             world.everything.setVelocity(new Pair (0, 0));
+            world.isScrolling = false;
         }
     }
 
